@@ -1,0 +1,39 @@
+CREATE TABLE SUPPLIER ( 
+Sno VARCHAR(5) CHECK (Sno LIKE 'S%' AND LEN(Sno) <= 5), 
+Sname VARCHAR(50) NOT NULL, 
+Address VARCHAR(100) NOT NULL, 
+City VARCHAR(50) CHECK (City IN ('London', 'Paris', 'Rome', 'New 
+York', 'Amsterdam')), 
+PRIMARY KEY (Sno) 
+); 
+
+
+CREATE TABLE PARTS ( 
+Pno INT PRIMARY KEY, 
+Pname VARCHAR(50) NOT NULL, 
+Color VARCHAR(20) NOT NULL, 
+Weight DECIMAL(5,2) NOT NULL, 
+Price DECIMAL(10,2) NOT NULL 
+); 
+
+
+CREATE TABLE PROJECT ( 
+Jno INT PRIMARY KEY, 
+Jname VARCHAR(50) UNIQUE NOT NULL, 
+City VARCHAR(50) CHECK (City IN ('London', 'Paris', 'Rome', 'New 
+York', 'Amsterdam')) NOT NULL 
+); 
+
+select * from PROJECT;
+CREATE TABLE SPJ ( 
+Sno VARCHAR(5), 
+Pno INT, 
+Jno INT, 
+Qty INT NOT NULL, 
+FOREIGN KEY (Sno) REFERENCES SUPPLIER(Sno), 
+FOREIGN KEY (Pno) REFERENCES PARTS(Pno), 
+FOREIGN KEY (Jno) REFERENCES PROJECT(Jno) w
+);
+insert into
+
+SELECT Jno FROM SPJ GROUP BY Jno HAVING COUNT(DISTINCT Pno) >= 3;
